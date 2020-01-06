@@ -1,0 +1,389 @@
+{% load static %}
+
+<!DOCTYPE HTML>
+<!--
+  Synchronous by TEMPLATED
+    templated.co @templatedco
+    Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
+-->
+<html>
+
+<head>
+    <title>Synchronous by TEMPLATED</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <link href="{% static 'http://fonts.googleapis.com/css?family=Lato:300,400,700,900' %}">
+    <!-- <link href="{% static 'https://unpkg.com/botui/build/botui.min.css' %}">
+    <link rel="stylesheet" href="{% static 'https://unpkg.com/botui/build/botui-theme-default.css' %}" > -->
+    <link rel="stylesheet" href="{% static 'css/dc.css' %}" >
+    <link rel="stylesheet" href="{% static 'css/stylenew.css' %}" >
+    <link rel="stylesheet" href="{% static 'css/introjs.css' %}" >
+    <!-- <link rel="stylesheet" href="{% static 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css' %}"> -->
+    <!--[if lte IE 8]><script src="js/html5shiv.js"></script><![endif]-->
+    <!--[if lte IE 8]><link rel="stylesheet" href="css/ie/v8.css" /><![endif]-->
+    <!--[if lte IE 9]><link rel="stylesheet" href="css/ie/v9.css" /><![endif]-->
+    <style>
+        .intro_button{
+          margin-top: 38px;
+          float: left;
+          margin-left: 30px;
+        background-color: #1ab394;
+        color: white;
+        }
+        .botui-container {  
+                background-color: #41c0cc;
+              background-image: linear-gradient(-90deg,#41c0cc,#41cca5);
+              width: 300px; 
+              font-size: 11px;
+                font-family: "Open Sans", sans-serif;
+                border: 3px solid #f1f1f1; 
+
+            }
+
+            .botui-messages-container { /*this is the container for the msg after the user has clicked
+              font-size: 11px;
+              padding-top: 2px;
+              padding-right: 20px;
+              padding-bottom: 0;
+
+
+            }
+
+            .botui-actions-container { /*everything related to the clikcable buttons*/
+              font-size: 11px;
+              /*padding-top: 0;
+              padding-right: 0;
+              padding-left: 0;*/
+            
+            }
+
+            .botui-actions-text-input {
+                border: 0;
+                outline: 0;
+                border-radius: 0;
+                padding: 5px 7px;
+                font-family: "Open Sans", sans-serif;
+                background-color: transparent;
+                color: #595a5a;
+                border-bottom: 1px solid #919292
+              }
+            .botui-actions-text-submit {
+                color: #fff;
+                width: 30px;
+                padding: 5px;
+                height: 30px;
+                line-height: 1;
+                border-radius: 50%;
+                border: 1px solid #919292;
+                background: #777979
+              }
+
+            .botui-actions-buttons {
+                text-align: center;
+            }
+
+            .botui-message {
+              font-size: 11px;
+              min-height: 30px
+
+            }
+            .botui-message-content.text{ /*this is the bot's questions*/
+              background-color: #e1fafc;
+              color: #404040;
+              font-size: 11px;
+
+            }
+            .botui-message-content.human{/*this is the user's response after cliking on*/
+              background-color: #f7ff61;
+              color: #404040;
+              font-size: 11px;
+            }
+
+            .botui-message-content-link {
+              font-size: 14px;
+            }
+
+            .botui-actions-text-input {
+              background-color: #e1fafc;
+              color: #404040;
+              font-size: 14px;
+            }
+
+            .botui-actions-text-submit {
+              font-size: 14px;
+            }
+
+            .botui-actions-buttons-button {
+              
+              padding: 7px 10px;
+              font-size: 7px; /*to increase/decrease size of the button*/
+              border: none;
+              cursor: pointer;
+              opacity: 0.8;
+              font-size: 11px;
+              
+            }
+            .open-button { /*this is the chat button that is in grey*/
+              background-color: #555;
+              color: white;
+              padding: 14px 20px; /*to increase/decrease size of the button*/
+              border: none;
+              cursor: pointer;
+              opacity: 0.8;
+              position: fixed;
+              bottom: 15px;
+              right: 15px;
+              width: 270px;
+              font-size: 15px;
+            }
+            /* The popup chat - hidden by default */
+            .chat-popup {
+              display: none;
+              position: fixed;
+              bottom: 50px;
+              right: 10px;
+              /*border: 3px solid #f1f1f1; border for the chat window*/
+              z-index: 9;
+              width: 300px;
+            }
+
+            /* Add styles to the form container */
+            .form-container {
+              max-width: 500px;
+              padding: 10px;
+              background-color: white;
+            }
+
+            /* Full-width textarea */
+            .form-container textarea {
+              width: 100%;
+              /*padding: 25px;*/
+              margin: 5px 0 5px 0;
+              border: none;
+              background: #f1f1f1;
+              resize: none;
+              min-height: 100px;
+            }
+
+            /* When the textarea gets focus, do something */
+            .form-container textarea:focus {
+              background-color: #4CAF50;
+              outline: none;
+            }
+
+            /* Set a style for the submit/send button */
+            .form-container .btn {
+              background-color: #4CAF50;
+              color: white;
+              padding: 16px 20px;
+              border: none;
+              cursor: pointer;
+              width: 100%;
+              margin-bottom:0;
+              opacity: 0.8;
+            }
+
+
+
+            /* Add a red background color to the cancel button */
+            .form-container .cancel {
+              background-color: black;
+
+
+              
+            }
+
+            /* Add some hover effects to buttons */
+            .form-container .btn:hover, .open-button:hover {
+              opacity: 1;
+           }
+
+           .icon{
+            position: fixed;
+            font-size: 24px;
+             right: 30px;
+             bottom: 15px;
+             cursor: pointer;
+             /*top:15px;*/
+           }
+
+           .icon-close{
+            position: fixed;
+            font-size: 24px;
+             right: 70px;
+             bottom: 15px;
+             cursor: pointer;
+
+           }
+
+.search-container{
+  width: 490px;
+  /*margin-top: -50px;*/
+  display: block;
+  margin: 0 auto;
+  padding-top: 20px
+}
+
+input#search-bar{
+  margin: 0 auto;
+  width: 100%;
+  height: 45px;
+  padding: 0 20px;
+  font-size: 1rem;
+  border: 1px solid #D0CFCE;
+  outline: none;
+  &:focus{
+    border: 1px solid #008ABF;
+    transition: 0.35s ease;
+    color: #008ABF;
+    &::-webkit-input-placeholder{
+      transition: opacity 0.45s ease; 
+  	  opacity: 0;
+     }
+    &::-moz-placeholder {
+      transition: opacity 0.45s ease; 
+  	  opacity: 0;
+     }
+    &:-ms-placeholder {
+     transition: opacity 0.45s ease; 
+  	 opacity: 0;
+     }    
+   }
+ }
+
+.search-icon{
+  position: relative;
+  float: right;
+  width: 75px;
+  height: 75px;
+  top: -62px;
+  right: -5px;
+}
+
+.newchart{
+	margin-left: 450px;
+	margin-right:450px;
+}
+
+
+
+</style>
+</head>
+
+<body>
+    <!-- <button class="open-button" onclick="openForm()"></button> -->
+    <div onclick="openForm()">
+        <i class="icon fa fa-comment" style="font-size: 24px;color:steelblue;"></i></div>
+    <div class="chat-popup" id="myForm">
+        <div class="botui-app-container" id="reminder-bot">
+            <bot-ui id="hi"></bot-ui>
+        </div>
+        <form action="/action_page.php" class="form-container">
+            <div onclick="closeForm()">
+                <i class="icon-close fa fa-times" style="font-size: 24px;color:steelblue;"></i></div>
+            <!-- <button type="button" class="btn cancel" onclick="closeForm()">Close</button> -->
+        </form>
+    </div>
+    <div id="wrapper">
+        <!-- Header -->
+        <div id="header">
+            <button class="intro_button" type="button" autofocus onclick="javascript:introJs().setOption('showProgress', true).start();">Start Tour!</button>
+            <div class="container">
+                <!-- Logo -->
+                <div id="logo">
+                    <h1><a href="#">Analytics Dashboard</a></h1>
+                </div>
+                <!-- Nav -->
+            </div>
+        </div>
+        <!-- /Header -->
+        <form class="search-container">
+        	<input type="text" id="search-bar" placeholder="Get me a graph of ..">
+    		<a href="#"><img class="search-icon" src="http://www.endlessicons.com/wp-content/uploads/2012/12/search-icon.png" onclick="buttonclicked()"></a>
+        </form>
+        <div id="page" style="margin-top:-61px;">
+            <div class="container" id = "container">
+                <div class="row">
+                    <div class="2u chart-wrapper" data-step="1" data-intro="State Selector Drop Down. Select a state to view specific stats.OPTIONAL FIELD" style="font-weight: normal" data-position="right" id="menuselect" style="background-color: #33CC99; height: 60px;">
+                        <div class="chart-title"> <strong> State Selector </strong> </div>
+                    </div>
+                    <div class="2u">
+                        <div> <span> &nbsp</span></div>
+                    </div>
+                    <div class="2u chart-wrapper" data-step="2" data-intro="Widget Displays the total donation count for the selections" style="font-weight: normal" data-position="bottom" id="total-projects">
+                        <div class="chart-title"> <strong> Total Donation Count </strong> </div>
+                    </div>
+                    <div class="2u chart-wrapper" data-step="3" data-intro="Widget Displays the total donation amount for the selections" style="font-weight: normal" data-position="bottom" id="net-donations">
+                        <div class="chart-title"> <strong> Nett Donations ($) </strong> </div>
+                    </div>
+                    <div class="3u dc-data-count dc-chart" data-step="4" data-intro="Selection widget displays the total rows available and rows currently selected in analysis" style="font-weight: normal" data-position="left" id="row-selection">
+                        <span class="filter-count">_</span> / <span class="total-count">_</span> records | <br\>
+                            <span data-step="11" data-intro="Click to reset the filters for the analysis" style="font-weight: normal" data-position="left">
+                                <a href='javascript:dc.filterAll();dc.redrawAll();'>
+                                    <font color="#33CC99">Reset All</font>
+                                </a>
+                            </span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="6u chart-wrapper" data-step="5" data-intro="Area chart showing the number of donations over a period of time. Drag and select to view detailed data for a particular time range" style="font-weight: normal" data-position="right" id="date-chart">
+                        <div class="chart-title bold"> <strong> Number of Donations </strong></div>
+                    </div>
+                    <div class="3u chart-wrapper" data-step="6" data-intro="View the donation count for the different type of resources. Hover the mouse for tooltips." style="font-weight: normal" data-position="left" id="resource-chart">
+                        <div class="chart-title"> <strong> Donation Count for Resources </strong> </div>
+                    </div>
+                    <div class="3u chart-wrapper" data-step="7" data-intro="Funding Status Displayed on a donut chart. Hover for tool tips" style="font-weight: normal" data-position="left" id="funding-chart">
+                        <div class="chart-title"> <strong> Funding Status </strong> </div>
+                    </div>
+
+                </div>
+                
+                <div class="row">
+                    <div class="4u chart-wrapper" data-step="8" data-intro="View the donation counts for the different grade groups" style="font-weight: normal" data-position="right" id="grade-chart">
+                        <div class="chart-title"> <strong> Donation Count by Grade </strong> </div>
+                    </div>
+                    <div class="4u chart-wrapper" data-step="9" data-intro="View the donation count for the different poverty levels. Hover the cursoe for tooltips." style="font-weight: normal" data-position="top" id="poverty-chart">
+                        <div class="chart-title"> <strong> Donation Count by Poverty Level</strong></div>
+                    </div>
+                    <div class="4u chart-wrapper" data-step="10" data-intro="View the donation amount by state.THIS CHART IS STAND ALONE AND WILL NOT FILTER BY THE OTHER SELECTIONS" style="font-weight: normal" data-position="left" id="state-donations">
+                        <div class="chart-title"> <strong> Donation Amount by State ($) </strong> </div>
+                    </div>
+                </div>
+            </div>
+            <div id = "newcontainer">
+            	<div class = "newchart" id="chart"></div>
+
+                </div>
+        </div>
+    </div>
+    <script src="{% static 'js/crossfilter.js' %}"></script>
+    <script src="{% static 'js/d3.js' %}"></script>
+    <!-- <script src=''></script> -->
+    <script src="{% static 'js/vue.js' %}"></script>
+    <script src="{% static 'js/botui.js' %}"></script>
+    <script src="{% static 'js/jquery.js' %}"></script>
+    <script src="{% static 'js/dc.js' %}"></script>
+    <script src="{% static 'js/queue.js' %}"></script>
+    <script src="{% static 'js/Dashboard.js' %}"></script>
+    <script src="{% static 'js/intro.js' %}"></script>
+    <script src="{% static 'js/copy.js' %}"></script>
+    <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script> -->
+    <script src="{% static 'js/skel.min.js' %}"></script>
+    <script src="{% static 'js/skel-panels.min.js' %}"></script>
+    <script src="{% static 'js/init.js' %}"></script>
+    <script type="text/javascript">
+    	document.getElementById("newcontainer").style.display = "none"
+    	var chartdisplayed = true;
+    	function buttonclicked(){
+    		chartdisplayed = false;
+    		// document.getElementById("container").style.display = "none"
+    		document.getElementById("newcontainer").style.display = "block"
+    		makeGraphs()
+    		// makeGraphs()
+    	}
+    </script>
+    <!-- <script src="https://unpkg.com/axios/dist/axios.min.js"></script> -->
+</body>
+
+</html>
